@@ -1694,43 +1694,53 @@ function WhatsAppAIWorkflow() {
           <div className="bg-gradient-to-br from-green-50 to-blue-50 p-6 rounded-lg border-2 border-green-300">
             <h3 className="text-xl font-bold mb-4 text-green-800">Complete Workflow States</h3>
             <div className="grid grid-cols-2 md:grid-cols-5 gap-3 text-sm">
-              <div className="bg-white p-3 rounded shadow text-center">
+              <div className="bg-white p-3 rounded shadow text-center relative">
+                <div className="absolute -top-2 -left-2 w-6 h-6 bg-gray-700 text-white rounded-full flex items-center justify-center text-xs font-bold">1</div>
                 <div className="font-bold text-gray-700">IDLE</div>
                 <div className="text-xs text-gray-500 mt-1">Waiting for input</div>
               </div>
-              <div className="bg-white p-3 rounded shadow text-center">
+              <div className="bg-white p-3 rounded shadow text-center relative">
+                <div className="absolute -top-2 -left-2 w-6 h-6 bg-blue-700 text-white rounded-full flex items-center justify-center text-xs font-bold">2</div>
                 <div className="font-bold text-blue-700">SEARCHING</div>
                 <div className="text-xs text-gray-500 mt-1">Fetching flights</div>
               </div>
-              <div className="bg-white p-3 rounded shadow text-center">
+              <div className="bg-white p-3 rounded shadow text-center relative">
+                <div className="absolute -top-2 -left-2 w-6 h-6 bg-green-700 text-white rounded-full flex items-center justify-center text-xs font-bold">3</div>
                 <div className="font-bold text-green-700">SHOWING_RESULTS</div>
                 <div className="text-xs text-gray-500 mt-1">Display options</div>
               </div>
-              <div className="bg-white p-3 rounded shadow text-center">
+              <div className="bg-white p-3 rounded shadow text-center relative">
+                <div className="absolute -top-2 -left-2 w-6 h-6 bg-yellow-700 text-white rounded-full flex items-center justify-center text-xs font-bold">4</div>
                 <div className="font-bold text-yellow-700">FLIGHT_SELECTED</div>
                 <div className="text-xs text-gray-500 mt-1">Fare verification</div>
               </div>
-              <div className="bg-white p-3 rounded shadow text-center">
+              <div className="bg-white p-3 rounded shadow text-center relative">
+                <div className="absolute -top-2 -left-2 w-6 h-6 bg-orange-700 text-white rounded-full flex items-center justify-center text-xs font-bold">5</div>
                 <div className="font-bold text-orange-700">ADDING_SERVICES</div>
                 <div className="text-xs text-gray-500 mt-1">SSR selection</div>
               </div>
-              <div className="bg-white p-3 rounded shadow text-center">
+              <div className="bg-white p-3 rounded shadow text-center relative">
+                <div className="absolute -top-2 -left-2 w-6 h-6 bg-pink-700 text-white rounded-full flex items-center justify-center text-xs font-bold">6</div>
                 <div className="font-bold text-pink-700">COLLECTING_PASSENGER</div>
                 <div className="text-xs text-gray-500 mt-1">Get details</div>
               </div>
-              <div className="bg-white p-3 rounded shadow text-center">
+              <div className="bg-white p-3 rounded shadow text-center relative">
+                <div className="absolute -top-2 -left-2 w-6 h-6 bg-purple-700 text-white rounded-full flex items-center justify-center text-xs font-bold">7</div>
                 <div className="font-bold text-purple-700">CONFIRMING_DETAILS</div>
                 <div className="text-xs text-gray-500 mt-1">Final check</div>
               </div>
-              <div className="bg-white p-3 rounded shadow text-center">
+              <div className="bg-white p-3 rounded shadow text-center relative">
+                <div className="absolute -top-2 -left-2 w-6 h-6 bg-indigo-700 text-white rounded-full flex items-center justify-center text-xs font-bold">8</div>
                 <div className="font-bold text-indigo-700">BOOKING</div>
                 <div className="text-xs text-gray-500 mt-1">API call</div>
               </div>
-              <div className="bg-white p-3 rounded shadow text-center">
+              <div className="bg-white p-3 rounded shadow text-center relative">
+                <div className="absolute -top-2 -left-2 w-6 h-6 bg-teal-700 text-white rounded-full flex items-center justify-center text-xs font-bold">9</div>
                 <div className="font-bold text-teal-700">TICKETING</div>
                 <div className="text-xs text-gray-500 mt-1">Issue ticket</div>
               </div>
-              <div className="bg-white p-3 rounded shadow text-center">
+              <div className="bg-white p-3 rounded shadow text-center relative">
+                <div className="absolute -top-2 -left-2 w-6 h-6 bg-green-800 text-white rounded-full flex items-center justify-center text-xs font-bold">10</div>
                 <div className="font-bold text-green-800">COMPLETED</div>
                 <div className="text-xs text-gray-500 mt-1">Success!</div>
               </div>
