@@ -4,9 +4,12 @@
   "type": "module",
   "description": "WhatsApp AI Agent Flight Booking Workflow Visualization",
   "main": "index.jsx",
+  "engines": {
+    "node": ">=18.0.0"
+  },
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "npx vite build",
     "preview": "vite preview"
   },
   "dependencies": {
