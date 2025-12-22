@@ -39,13 +39,16 @@ const FlowStep = ({ number, title, description, color = "#2196F3", icon: Icon })
 );
 
 const MessageBubble = ({ isAI, children }) => (
-  <div className={`flex ${isAI ? 'justify-start' : 'justify-end'} mb-3`}>
+  <div className={`flex ${isAI ? 'justify-start' : 'justify-end'}  mb-3`}>
     <div 
-      className="max-w-[80%] p-3 rounded-lg shadow-sm"
-      style={{ backgroundColor: isAI ? '#E8F5E9' : '#DCF8C6' }}
+      className="max-w-[80%] p-3 rounded-lg shadow-sm border-2"
+      style={{ 
+        backgroundColor: isAI ? '#E8F5E9' : '#DCF8C6',
+        borderColor: isAI ? '#4CAF50' : '#25D366'
+      }}
     >
       <div className="flex items-center gap-2 mb-1">
-        {isAI ? '🤖 AI Agent' : '👤 User'}
+        {isAI ? '🤖 AI Agent:' : '👤 User:'}
       </div>
       <div className="text-gray-800">{children}</div>
     </div>
@@ -298,11 +301,9 @@ function WhatsAppAIWorkflow() {
 
         {/* Main User Journey */}
         <WorkflowSection title="1. Conversation Initiation" icon={Phone} color="#25D366">
-          <div className="mb-4 p-4 bg-green-50 rounded-lg border-2 border-green-300">
-            <h4 className="font-bold text-green-800 mb-2">User Interaction Example</h4>
-            <p className="text-sm text-gray-700">User starts conversation by sending a natural language message about flight booking</p>
-          </div>
-
+         
+<div className='border-2 p-4'>
+  Chat:
           <MessageBubble isAI={false}>
             I want to book a flight from Delhi to Mumbai tomorrow
           </MessageBubble>
@@ -313,7 +314,7 @@ function WhatsAppAIWorkflow() {
               <span className="text-sm">Searching flights...</span>
             </div>
           </MessageBubble>
-          
+  </div>        
           <div className="mt-4 space-y-3">
             <FlowStep 
               number="1"
@@ -376,55 +377,33 @@ function WhatsAppAIWorkflow() {
           </div>
         </WorkflowSection>
 
-        {/* Flight Search Results */}
-        <WorkflowSection title="2. Flight Search Results Display" icon={Search} color="#2196F3">
-          <MessageBubble isAI={true}>
-            <div>Found 25 flights! Here are top options:</div>
-          </MessageBubble>
-          
-          <div className="mt-4">
-            <FlightCard 
-              airline="Air India"
-              flightNo="AI-123"
-              origin="DEL"
-              dest="BOM"
-              depTime="08:00 AM"
-              arrTime="10:30 AM"
-              duration="2h 30m"
-              price="₹5,500"
-              index={1}
-            />
-            <FlightCard 
-              airline="IndiGo"
-              flightNo="6E-456"
-              origin="DEL"
-              dest="BOM"
-              depTime="10:00 AM"
-              arrTime="12:30 PM"
-              duration="2h 30m"
-              price="₹4,800"
-              index={2}
-            />
-            <FlightCard 
-              airline="Vistara"
-              flightNo="UK-789"
-              origin="DEL"
-              dest="BOM"
-              depTime="02:00 PM"
-              arrTime="04:30 PM"
-              duration="2h 30m"
-              price="₹6,200"
-              index={3}
-            />
-          </div>
-          
-          <MessageBubble isAI={true}>
-            <div className="bg-blue-50 p-3 rounded-lg border border-blue-200">
-              <div className="font-semibold mb-2">How to Select:</div>
-              <div className="text-sm">Reply with flight number (e.g., type "1" for Air India)</div>
-            </div>
-          </MessageBubble>
 
+        {/* Flight Search Results */}
+        <WorkflowSection  title="2. Flight Search Results Display" icon={Search} color="#2196F3">
+          <div className='border-2 p-4'>
+          <MessageBubble isAI={true}>
+            ✈️ Found 25 flights! Here are top options:
+            <br/><br/>
+            1️⃣ Air India AI-123 - ₹5,500<br/>
+            🛫 DEL 08:00 AM → BOM 10:30 AM<br/>
+            ⏱️ Duration: 2h 30m | Non-stop
+            <br/><br/>
+            2️⃣ IndiGo 6E-456 - ₹4,800<br/>
+            🛫 DEL 10:00 AM → BOM 12:30 PM<br/>
+            ⏱️ Duration: 2h 30m | Non-stop
+            <br/><br/>
+            3️⃣ Vistara UK-789 - ₹6,200<br/>
+            🛫 DEL 02:00 PM → BOM 04:30 PM<br/>
+            ⏱️ Duration: 2h 30m | Non-stop
+            <br/><br/>
+            💡 Reply with number to select (e.g., type "1")
+          </MessageBubble>
+       
+          
+          <MessageBubble isAI={true}>
+            💡 Reply with flight number (e.g., type "1" for Air India)
+          </MessageBubble>
+   </div>
           <div className="mt-4 p-4 bg-gray-50 rounded-lg border-l-4 border-blue-500">
             <h4 className="font-bold mb-2">System Process:</h4>
             <ol className="space-y-2 text-sm">
@@ -439,6 +418,7 @@ function WhatsAppAIWorkflow() {
 
         {/* Flight Selection */}
         <WorkflowSection title="3. Flight Selection & Confirmation" icon={CheckCircle} color="#4CAF50">
+          <div className='border-2 p-4'>
           <MessageBubble isAI={false}>1</MessageBubble>
           <MessageBubble isAI={true}>
             <div className="space-y-3">
@@ -469,7 +449,7 @@ function WhatsAppAIWorkflow() {
               </div>
             </div>
           </MessageBubble>
-
+</div>
           <div className="my-4 space-y-3">
             <div className="bg-blue-50 p-4 rounded-lg border-l-4 border-blue-500">
               <h4 className="font-bold mb-2 text-blue-800">System Process - Flight Selection</h4>
@@ -635,79 +615,47 @@ function WhatsAppAIWorkflow() {
 
         {/* Service Selection */}
         <WorkflowSection title="5. Service Selection (SSR)" icon={Utensils} color="#FF9800">
-          <div className="mb-4 p-4 bg-orange-50 rounded-lg border-2 border-orange-300">
+          
+<div className='border-2 p-4'>
+          <MessageBubble isAI={true}>
+            <div className="space-y-2">
+              <div>🍽️ Would you like to add any services?</div>
+              
+              <div>
+                <div className="font-semibold">MEAL OPTIONS:</div>
+                <div>1️⃣ Vegetarian Meal - ₹200</div>
+                <div>2️⃣ Non-Veg Meal - ₹250</div>
+                <div>3️⃣ Jain Meal - ₹200</div>
+                <div>4️⃣ No meal</div>
+              </div>
+              
+              <div>
+                <div className="font-semibold">SEAT PREFERENCE:</div>
+                <div>A️. Window Seat</div>
+                <div>B️. Aisle Seat</div>
+                <div>C️. No preference</div>
+              </div>
+              
+              <div>
+                <div className="font-semibold">BAGGAGE (LCC Only):</div>
+                <div>X️. 15 KG - ₹500</div>
+                <div>Y️. 20 KG - ₹800</div>
+                <div>Z️. 25 KG - ₹1,200</div>
+              </div>
+              
+              <div className="mt-2 p-2  rounded">
+                💡 Reply: "1, A" for Veg meal + Window seat<br/>
+                Or type "skip" to continue without services
+              </div>
+            </div>
+          </MessageBubble>
+</div>
+<div className="mb-4 p-4 bg-orange-50 rounded-lg border-2 border-orange-300">
             <h4 className="font-bold text-orange-800 mb-2">What is SSR?</h4>
             <p className="text-sm text-gray-700">
               SSR (Special Service Request) includes additional services like meals, baggage, and seat selection. These are fetched from TBO API and presented to the user based on availability.
             </p>
           </div>
-
-          <MessageBubble isAI={true}>
-            <div className="space-y-3">
-              <div className="font-bold">Would you like to add any services?</div>
-              
-              <div className="border-t pt-2">
-                <div className="font-semibold mb-2 flex items-center gap-2">
-                  MEAL PREFERENCES:
-                </div>
-                <div className="space-y-1 text-sm">
-                  <div className="bg-white p-2 rounded border">
-                    <span className="font-semibold">1.</span> Vegetarian Meal - ₹200
-                    <div className="text-xs text-gray-600">Code: VGML</div>
-                  </div>
-                  <div className="bg-white p-2 rounded border">
-                    <span className="font-semibold">2.</span> Non-Vegetarian Meal - ₹250
-                    <div className="text-xs text-gray-600">Code: NVML</div>
-                  </div>
-                  <div className="bg-white p-2 rounded border">
-                    <span className="font-semibold">3.</span> Jain Meal - ₹200
-                    <div className="text-xs text-gray-600">Code: JNML</div>
-                  </div>
-                  <div className="bg-white p-2 rounded border">
-                    <span className="font-semibold">4.</span> No meal preference
-                  </div>
-                </div>
-              </div>
-              
-              <div className="border-t pt-2">
-                <div className="font-semibold mb-2 flex items-center gap-2">
-                  SEAT PREFERENCES:
-                </div>
-                <div className="space-y-1 text-sm">
-                  <div className="bg-white p-2 rounded border">
-                    <span className="font-semibold">1.</span> Window Seat
-                  </div>
-                  <div className="bg-white p-2 rounded border">
-                    <span className="font-semibold">2.</span> Aisle Seat
-                  </div>
-                  <div className="bg-white p-2 rounded border">
-                    <span className="font-semibold">3.</span> No preference
-                  </div>
-                </div>
-              </div>
-              
-              <div className="border-t pt-2">
-                <div className="font-semibold mb-2 flex items-center gap-2">
-                  BAGGAGE (LCC Only):
-                </div>
-                <div className="space-y-1 text-sm">
-                  <div className="bg-white p-2 rounded border">
-                    <span className="font-semibold">1.</span> 15 KG - ₹500
-                    <div className="text-xs text-gray-600">Code: 15KG</div>
-                  </div>
-                  <div className="bg-white p-2 rounded border">
-                    <span className="font-semibold">2.</span> 20 KG - ₹800
-                    <div className="text-xs text-gray-600">Code: 20KG</div>
-                  </div>
-                  <div className="bg-white p-2 rounded border">
-                    <span className="font-semibold">3.</span> 25 KG - ₹1,200
-                    <div className="text-xs text-gray-600">Code: 25KG</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </MessageBubble>
-
           <div className="mt-4 space-y-4">
             <div className="bg-blue-50 p-4 rounded-lg border-l-4 border-blue-500">
               <h4 className="font-bold mb-3 text-blue-800">SSR API Integration Process</h4>
@@ -828,13 +776,8 @@ function WhatsAppAIWorkflow() {
 
         {/* Passenger Information */}
         <WorkflowSection title="6. Passenger Information Collection" icon={User} color="#E91E63">
-          <div className="mb-4 p-4 bg-pink-50 rounded-lg border-2 border-pink-300">
-            <h4 className="font-bold text-pink-800 mb-2">Passenger Data Requirements</h4>
-            <p className="text-sm text-gray-700">
-              All passenger details must match government-issued ID for successful boarding. System validates format and completeness before proceeding.
-            </p>
-          </div>
-
+         
+<div className='border-2 p-4 mb-2'>
           <MessageBubble isAI={true}>
             <div className="space-y-3">
               <div className="font-bold">Great! Now I need passenger details:</div>
@@ -874,6 +817,13 @@ function WhatsAppAIWorkflow() {
             </div>
           </MessageBubble>
 
+</div>
+ <div className="mb-4 p-4 bg-pink-50 rounded-lg border-2 border-pink-300">
+            <h4 className="font-bold text-pink-800 mb-2">Passenger Data Requirements</h4>
+            <p className="text-sm text-gray-700">
+              All passenger details must match government-issued ID for successful boarding. System validates format and completeness before proceeding.
+            </p>
+          </div>
           <div className="mt-4 space-y-4">
             <div className="bg-blue-50 p-4 rounded-lg border-l-4 border-blue-500">
               <h4 className="font-bold mb-3 text-blue-800">Data Parsing & Validation Process</h4>
@@ -1012,18 +962,13 @@ function WhatsAppAIWorkflow() {
 
         {/* Booking Confirmation */}
         <WorkflowSection title="7. Booking Confirmation & Processing" icon={CheckCircle} color="#4CAF50">
-          <div className="mb-4 p-4 bg-green-50 rounded-lg border-2 border-green-300">
-            <h4 className="font-bold text-green-800 mb-2">Final Confirmation Stage</h4>
-            <p className="text-sm text-gray-700">
-              Before booking, system displays complete summary for user verification. This is the last chance to modify details before payment.
-            </p>
-          </div>
-
+         
+<div className='border-2 p-4'>
           <MessageBubble isAI={true}>
             <div className="space-y-3">
               <div className="font-bold text-lg">Please confirm your booking details:</div>
               
-              <div className="bg-white p-3 rounded border-2 border-blue-300">
+              <div className="bg-white p-3 rounded border-2 ">
                 <div className="font-semibold mb-2 flex items-center gap-2">
                   FLIGHT DETAILS:
                 </div>
@@ -1035,7 +980,7 @@ function WhatsAppAIWorkflow() {
                 </ul>
               </div>
               
-              <div className="bg-white p-3 rounded border-2 border-purple-300">
+              <div className="bg-white p-3 rounded border-2">
                 <div className="font-semibold mb-2 flex items-center gap-2">
                   PASSENGER:
                 </div>
@@ -1047,7 +992,7 @@ function WhatsAppAIWorkflow() {
                 </ul>
               </div>
               
-              <div className="bg-white p-3 rounded border-2 border-orange-300">
+              <div className="bg-white p-3 rounded border-2">
                 <div className="font-semibold mb-2 flex items-center gap-2">
                   SERVICES:
                 </div>
@@ -1057,7 +1002,7 @@ function WhatsAppAIWorkflow() {
                 </ul>
               </div>
               
-              <div className="bg-gradient-to-r from-green-400 to-green-600 p-4 rounded-lg text-white text-center">
+              <div className="p-4 rounded-lg text-black text-center">
                 <div className="text-sm">TOTAL AMOUNT</div>
                 <div className="text-3xl font-bold">₹5,700</div>
                 <div className="text-xs mt-1">All taxes and fees included</div>
@@ -1096,6 +1041,31 @@ function WhatsAppAIWorkflow() {
             </div>
           </MessageBubble>
 
+          <MessageBubble isAI={true}>
+            🎉 BOOKING SUCCESSFUL!
+            <br/><br/>
+            📋 BOOKING DETAILS:<br/>
+            • PNR: ABC123<br/>
+            • Booking ID: 12345678<br/>
+            • Ticket: 098-1234567890<br/>
+            • Status: Confirmed
+            <br/><br/>
+            ✈️ FLIGHT INFO:<br/>
+            • Air India AI-123<br/>
+            • 15 March 2024<br/>
+            • DEL 08:00 → BOM 10:30<br/>
+            • Mr. John Doe
+            <br/><br/>
+            📧 E-ticket sent to: john@email.com<br/>
+            📱 SMS sent to: +91-9876543210
+            <br/><br/>
+            Next Steps:<br/>
+            ✓ Check your email for e-ticket<br/>
+            ✓ Web check-in opens 48 hours before flight<br/>
+            ✓ Carry valid photo ID to airport<br/>
+            ✓ Reach airport 2 hours before departure
+          </MessageBubble>
+</div>
           <div className="mt-4 space-y-4">
             <div className="bg-blue-50 p-4 rounded-lg border-l-4 border-blue-500">
               <h4 className="font-bold mb-3 text-blue-800">Complete Booking Process - Step by Step</h4>
@@ -1207,45 +1177,7 @@ function WhatsAppAIWorkflow() {
             </div>
           </div>
 
-          <div className="mt-4 p-6 bg-gradient-to-br from-green-400 to-blue-500 text-white rounded-lg shadow-xl">
-            <div className="text-center mb-4">
-              <div className="text-4xl mb-2">🎉</div>
-              <div className="text-3xl font-bold">BOOKING SUCCESSFUL!</div>
-            </div>
-            
-            <div className="grid md:grid-cols-2 gap-4">
-              <div className="bg-white/20 backdrop-blur p-4 rounded-lg space-y-2 text-sm">
-                <div className="font-bold text-lg mb-2">BOOKING DETAILS:</div>
-                <div>• PNR: ABC123</div>
-                <div>• Booking ID: 12345678</div>
-                <div>• Ticket: 098-1234567890</div>
-                <div>• Status: Confirmed</div>
-              </div>
-              
-              <div className="bg-white/20 backdrop-blur p-4 rounded-lg space-y-2 text-sm">
-                <div className="font-bold text-lg mb-2">FLIGHT INFO:</div>
-                <div>• Air India AI-123</div>
-                <div>• 15 March 2024</div>
-                <div>• DEL 08:00 → BOM 10:30</div>
-                <div>• Mr. John Doe</div>
-              </div>
-            </div>
-            
-            <div className="mt-4 text-center text-sm border-t border-white/30 pt-3">
-              <div>📧 E-ticket sent to: john@email.com</div>
-              <div>📱 SMS sent to: +91-9876543210</div>
-            </div>
-            
-            <div className="mt-4 bg-white/10 p-3 rounded text-sm">
-              <div className="font-semibold mb-2">Next Steps:</div>
-              <ul className="space-y-1">
-                <li>✓ Check your email for e-ticket</li>
-                <li>✓ Web check-in opens 48 hours before flight</li>
-                <li>✓ Carry valid photo ID to airport</li>
-                <li>✓ Reach airport 2 hours before departure</li>
-              </ul>
-            </div>
-          </div>
+        
 
           <div className="mt-4 p-4 bg-gray-50 rounded-lg border-l-4 border-gray-500">
             <h4 className="font-bold mb-3">Database Record Structure</h4>
@@ -1298,35 +1230,67 @@ function WhatsAppAIWorkflow() {
             </div>
           </MessageBubble>
 
-          <div className="mt-4 p-4 bg-blue-50 rounded-lg border-2 border-blue-300">
-            <div className="font-bold text-blue-700 mb-3 text-lg">📋 BOOKING STATUS</div>
-            
-            <div className="space-y-3 text-sm">
-              <div className="bg-white p-3 rounded">
-                <div className="font-semibold mb-1">🆔 PNR: ABC123</div>
-                <div className="flex items-center gap-2 text-green-600">
-                  <CheckCircle size={16} />
-                  Status: Confirmed & Ticketed
+          {/* WhatsApp-style Chat Interface */}
+          <div className="mt-4 bg-gray-50 rounded-lg p-4 max-w-md mx-auto border">
+            {/* User Message */}
+            <div className="flex justify-end mb-4">
+              <div className="bg-green-500 text-white rounded-lg px-3 py-2 max-w-xs">
+                <div className="text-sm">Check my booking ABC123</div>
+              </div>
+            </div>
+
+            {/* AI Agent Messages */}
+            <div className="mb-4">
+              <div className="bg-white rounded-lg px-3 py-2 shadow-sm max-w-xs">
+                <div className="text-sm text-gray-700">
+                  <div className="flex items-center gap-1 mb-1">
+                    <span>🤖</span>
+                    <span className="font-medium">AI Agent:</span>
+                  </div>
+                  <div>Fetching booking details...</div>
+                  <div className="flex items-center gap-1 mt-1 text-xs text-gray-500">
+                    <span>🔍</span>
+                    <span>Searching booking...</span>
+                  </div>
                 </div>
               </div>
-              
-              <div className="bg-white p-3 rounded">
-                <div className="font-semibold mb-2">✈️ FLIGHT DETAILS:</div>
-                <ul className="space-y-1">
-                  <li>• Air India AI-123</li>
-                  <li>• Delhi (DEL) → Mumbai (BOM)</li>
-                  <li>• 15 March 2024</li>
-                  <li>• Departure: 08:00 AM</li>
-                </ul>
+            </div>
+
+            {/* Date Separator */}
+            <div className="text-center text-xs text-gray-500 mb-4">Today</div>
+
+            {/* Booking Confirmation Message */}
+            <div className="mb-4">
+              <div className="bg-white rounded-lg px-3 py-2 shadow-sm max-w-xs">
+                <div className="text-sm">
+                  <div className="text-green-600 font-medium mb-2">✅ Booking Confirmed!</div>
+                  <div className="space-y-1 text-gray-700">
+                    <div>🆔 PNR: ABC123</div>
+                    <div>✈️ Air India AI-123</div>
+                    <div>Delhi → Mumbai</div>
+                    <div>15 March 2024, 08:00 AM</div>
+                  </div>
+                  <div className="text-xs text-gray-400 mt-2 text-right">10:30 AM ✓✓</div>
+                </div>
               </div>
-              
-              <div className="bg-white p-3 rounded">
-                <div className="font-semibold mb-2">👤 PASSENGER:</div>
-                <div>• Mr. John Doe</div>
+            </div>
+
+            {/* Passenger Details Message */}
+            <div className="mb-4">
+              <div className="bg-white rounded-lg px-3 py-2 shadow-sm max-w-xs">
+                <div className="text-sm">
+                  <div className="text-purple-600 font-medium mb-1">👤 Passenger Details</div>
+                  <div className="text-gray-700">Mr. John Doe</div>
+                  <div className=" font-medium mt-2">💰 Total Fare: ₹5,700</div>
+                  <div className="text-xs text-gray-400 mt-2 text-right">10:30 AM ✓✓</div>
+                </div>
               </div>
-              
-              <div className="bg-white p-3 rounded font-bold">
-                💰 FARE: ₹5,700
+            </div>
+
+            {/* User Response */}
+            <div className="flex justify-end">
+              <div className="bg-green-500 text-white rounded-lg px-3 py-2 max-w-xs">
+                <div className="text-sm">Thanks! When will I get my ticket?</div>
               </div>
             </div>
           </div>
@@ -1345,70 +1309,125 @@ function WhatsAppAIWorkflow() {
             </div>
           </MessageBubble>
 
-          <div className="mt-4 p-4 bg-red-50 rounded-lg border-2 border-red-300">
-            <div className="font-bold text-red-700 mb-3 text-lg">💰 CANCELLATION DETAILS</div>
-            
-            <div className="space-y-3 text-sm">
-              <div className="bg-white p-3 rounded">
-                <div className="mb-2">📋 Booking: ABC123</div>
-                <div>✈️ Flight: Air India AI-123 (15 March 2024)</div>
-              </div>
-              
-              <div className="bg-white p-3 rounded">
-                <div className="font-semibold mb-2">💸 REFUND CALCULATION:</div>
-                <ul className="space-y-1">
-                  <li>• Original Fare: ₹5,700</li>
-                  <li className="text-red-600">• Cancellation Charge: ₹1,000</li>
-                  <li className="font-bold text-green-600">• Refund Amount: ₹4,700</li>
-                </ul>
-              </div>
-              
-              <div className="bg-yellow-100 p-3 rounded border border-yellow-300">
-                <div className="font-semibold mb-2 flex items-center gap-2">
-                  <AlertTriangle className="text-yellow-600" size={16} />
-                  IMPORTANT:
+          {/* WhatsApp-style Cancellation Chat */}
+          <div className="mt-4 bg-gray-100 rounded-lg p-4 max-w-md">
+            {/* AI Agent Processing Messages - Left aligned */}
+            <div className="mb-3">
+              <div className="bg-white rounded-lg px-3 py-2 shadow-sm max-w-xs">
+                <div className="text-sm text-gray-700">
+                  <div className="flex items-center gap-1 mb-1">
+                    <span>🤖</span>
+                    <span className="font-medium">AI Agent:</span>
+                  </div>
+                  <div>Checking cancellation charges...</div>
+                  <div className="flex items-center gap-1 mt-1 text-xs text-gray-500">
+                    <span>💰</span>
+                    <span>Calculating refund...</span>
+                  </div>
                 </div>
-                <ul className="space-y-1">
-                  <li>• Refund processed in 7-10 business days</li>
-                  <li>• This action cannot be undone</li>
-                </ul>
               </div>
             </div>
-            
-            <div className="mt-3 text-center text-sm">
-              ❓ Are you sure you want to cancel?<br/>
-              Reply "CONFIRM" to proceed or "CANCEL" to keep booking
+
+            {/* Date Separator */}
+            <div className="text-center text-xs text-gray-500 mb-3">Today</div>
+
+            {/* Cancellation Details Message - Left aligned */}
+            <div className="mb-3">
+              <div className="bg-white rounded-lg px-3 py-2 shadow-sm max-w-xs">
+                <div className="text-sm">
+                  <div className="text-red-600 font-medium mb-2">💰 CANCELLATION DETAILS</div>
+                  <div className="space-y-1 text-gray-700">
+                    <div>📋 Booking: ABC123</div>
+                    <div>✈️ Flight: Air India AI-123 (15 March 2024)</div>
+                  </div>
+                  <div className="text-xs text-gray-400 mt-2 text-right">10:35 AM ✓✓</div>
+                </div>
+              </div>
+            </div>
+
+            {/* Refund Calculation Message - Left aligned */}
+            <div className="mb-3">
+              <div className="bg-white rounded-lg px-3 py-2 shadow-sm max-w-xs">
+                <div className="text-sm">
+                  <div className="text-green-600 font-medium mb-1">💸 REFUND CALCULATION:</div>
+                  <div className="space-y-1 text-gray-700">
+                    <div>• Original Fare: ₹5,700</div>
+                    <div className="text-red-600">• Cancellation Charge: ₹1,000</div>
+                    <div className="font-bold text-green-600">• Refund Amount: ₹4,700</div>
+                  </div>
+                  <div className="text-xs text-gray-400 mt-2 text-right">10:35 AM ✓✓</div>
+                </div>
+              </div>
+            </div>
+
+            {/* Important Notice Message - Left aligned */}
+            <div className="mb-3">
+              <div className="bg-white rounded-lg px-3 py-2 shadow-sm max-w-xs">
+                <div className="text-sm">
+                  <div className="text-yellow-600 font-medium mb-1">⚠️ IMPORTANT:</div>
+                  <div className="space-y-1 text-gray-700 text-xs">
+                    <div>• Refund processed in 7-10 business days</div>
+                    <div>• This action cannot be undone</div>
+                  </div>
+                  <div className="text-center mt-2 text-xs text-red-600">
+                    ❓ Are you sure you want to cancel?
+                  </div>
+                  <div className="text-xs text-gray-400 mt-2 text-right">10:36 AM ✓✓</div>
+                </div>
+              </div>
             </div>
           </div>
 
-          <MessageBubble isAI={false}>CONFIRM</MessageBubble>
+          <MessageBubble isAI={false}>Yes</MessageBubble>
           
-          <div className="mt-4 p-6 bg-green-100 rounded-lg border-2 border-green-400">
-            <div className="text-center mb-4">
-              <CheckCircle className="text-green-600 mx-auto mb-2" size={48} />
-              <div className="text-2xl font-bold text-green-700">CANCELLATION SUCCESSFUL</div>
+          {/* WhatsApp-style Success Chat */}
+          <div className="mt-4 bg-gray-100 rounded-lg p-4 max-w-md">
+            {/* User Confirmation - Right aligned */}
+            <div className="flex justify-end mb-3">
+              <div className="bg-green-400 text-white rounded-lg px-3 py-2 max-w-xs">
+                <div className="text-sm">Yes</div>
+              </div>
             </div>
-            
-            <div className="space-y-2 text-sm">
-              <div className="bg-white p-3 rounded">
-                <div className="font-semibold mb-1">📋 DETAILS:</div>
-                <ul className="space-y-1">
-                  <li>• PNR: ABC123 - CANCELLED</li>
-                  <li>• Request ID: CR123456</li>
-                  <li>• Refund Amount: ₹4,700</li>
-                </ul>
+
+            {/* Success Message - Left aligned */}
+            <div className="mb-3">
+              <div className="bg-white rounded-lg px-3 py-2 shadow-sm max-w-xs">
+                <div className="text-sm">
+                  <div className="text-green-600 font-medium mb-2 flex items-center gap-1">
+                    <span>✅</span>
+                    <span>CANCELLATION SUCCESSFUL</span>
+                  </div>
+                  <div className="space-y-1 text-gray-700">
+                    <div>📋 PNR: ABC123 - CANCELLED</div>
+                    <div>🆔 Request ID: CR123456</div>
+                    <div className="font-medium text-green-600">💰 Refund Amount: ₹4,700</div>
+                  </div>
+                  <div className="text-xs text-gray-400 mt-2 text-right">10:37 AM ✓✓</div>
+                </div>
               </div>
-              
-              <div className="bg-white p-3 rounded">
-                <div className="font-semibold mb-1">💰 REFUND TIMELINE:</div>
-                <ul className="space-y-1">
-                  <li>• Processing: 7-10 business days</li>
-                  <li>• Method: Original payment source</li>
-                </ul>
+            </div>
+
+            {/* Refund Timeline Message - Left aligned */}
+            <div className="mb-3">
+              <div className="bg-white rounded-lg px-3 py-2 shadow-sm max-w-xs">
+                <div className="text-sm">
+                  <div className="text-orange-600 font-medium mb-1">💰 REFUND TIMELINE:</div>
+                  <div className="space-y-1 text-gray-700 text-xs">
+                    <div>• Processing: 7-10 business days</div>
+                    <div>• Method: Original payment source</div>
+                  </div>
+                  <div className="text-xs text-gray-400 mt-2 text-right">10:37 AM ✓✓</div>
+                </div>
               </div>
-              
-              <div className="text-center">
-                📧 Confirmation sent to: john@email.com
+            </div>
+
+            {/* Confirmation Email Message - Left aligned */}
+            <div className="mb-3">
+              <div className="bg-white rounded-lg px-3 py-2 shadow-sm max-w-xs">
+                <div className="text-sm text-gray-700">
+                  📧 Confirmation sent to: john@email.com
+                  <div className="text-xs text-gray-400 mt-2 text-right">10:37 AM ✓✓</div>
+                </div>
               </div>
             </div>
           </div>
